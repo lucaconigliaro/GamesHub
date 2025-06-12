@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+// Type
 import type { Game } from "../Types/Game";
 
+// Interface is used to define the structure of the props passed to the Carousel component
 interface CarouselProps {
     games: Game[];
 }

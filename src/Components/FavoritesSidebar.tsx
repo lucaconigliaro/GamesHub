@@ -1,9 +1,13 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
+// Context
 import { GlobalContext } from "../Context/GlobalContext";
+
+// Types
 import type { Game } from "../Types/Game";
 import type { GlobalContextType } from "../Types/GlobalContextType";
-import { Link } from "react-router-dom";
 
+// Interface is used to define the structure of the props passed to the Sidebar component
 interface FavoritesSidebarProps {
   isOpen: boolean;
   onClose: () => void;

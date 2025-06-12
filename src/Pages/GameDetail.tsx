@@ -1,6 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
+// Context
 import { GlobalContext } from "../Context/GlobalContext";
+// Type
 import type { Game } from "../Types/Game";
 
 export default function GameDetail() {
@@ -25,16 +27,19 @@ export default function GameDetail() {
 
     if (error) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-950 to-gray-900 text-white px-4">
-                <div className="bg-red-800 p-6 rounded-lg shadow-lg max-w-md w-full text-center">
-                    <h2 className="text-2xl font-bold mb-2">{error}</h2>
-                    <p className="text-gray-300">
-                        Controlla l’URL o torna alla{" "}
-                        <Link to="/" className="text-yellow-400 underline hover:text-yellow-300">
-                            Home
-                        </Link>
-                        .
+            <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white px-4">
+                <div className="text-center max-w-md">
+                    <h1 className="text-6xl font-bold text-yellow-400 mb-4">404</h1>
+                    <p className="text-xl mb-6">Oops! Gioco non trovato.</p>
+                    <p className="text-gray-400 mb-8">
+                        Il gioco che stai cercando non esiste o è stato rimosso.
                     </p>
+                    <Link
+                        to="/"
+                        className="inline-block text-sm px-4 py-2 border border-yellow-400 text-yellow-400 rounded hover:bg-yellow-400/10 hover:text-yellow-300 transition-all duration-200 ease-in-out transform hover:scale-105"
+                    >
+                        Torna alla Home
+                    </Link>
                 </div>
             </div>
         );
@@ -73,13 +78,41 @@ export default function GameDetail() {
                 <button
                     onClick={() => isFav ? removeFavorite(game.id) : addFavorite(game)}
                     className={`mt-6 w-full py-2 rounded transition-all text-sm font-medium tracking-wide ${isFav
-                            ? "bg-yellow-400 text-gray-900 hover:bg-yellow-300"
-                            : "border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-gray-900"
+                        ? "bg-yellow-400 text-gray-900 hover:bg-yellow-300"
+                        : "border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-gray-900"
                         }`}
                 >
                     {isFav ? "★ Rimuovi dai preferiti" : "☆ Aggiungi ai preferiti"}
                 </button>
             </div>
+            {context && (
+                <div className="mt-12 max-w-5xl ">
+                    <h2 className="text-2xl font-semibold mb-4 text-white">🎮 Giochi simili:</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {context.games
+                            .filter(g => g.category === game.category && g.id !== game.id)
+                            .slice(0, 3) // Limit to 3 similar games
+                            .map(similar => (
+                                <Link
+                                    key={similar.id}
+                                    to={`/games/${similar.id}`}
+                                    className="bg-gray-900 p-4 rounded-lg hover:bg-gray-700 transition shadow flex flex-col"
+                                >
+                                    <img
+                                        src={similar.coverImage}
+                                        alt={similar.title}
+                                        className="h-40 w-full object-cover rounded mb-3"
+                                    />
+                                    <h3 className="text-lg font-bold text-yellow-400 truncate">{similar.title}</h3>
+                                    <p className="text-sm text-gray-300 truncate">{similar.details.platform.join(", ")}</p>
+                                </Link>
+                            ))}
+                        {context.games.filter(g => g.category === game.category && g.id !== game.id).length === 0 && (
+                            <p className="text-gray-400 col-span-full">Nessun altro gioco trovato in questa categoria.</p>
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

@@ -1,5 +1,6 @@
 import { useState, useMemo, useContext, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
+// Context
 import { GlobalContext } from "../Context/GlobalContext";
 
 // Constants for options
@@ -9,7 +10,7 @@ const PLAYER_OPTIONS = ["Single Player", "Multiplayer", "Co-op"];
 const CATEGORY_OPTIONS = ["Action-Adventure", "Battle Royale", "MOBA", "Party", "RPG", "Sandbox", " FPS", "Roguelike", "Simulation", "Sports", "Platform", "Survival Horror", "Metroidvania", "Shooter", "Survival", "Co-op"];
 const PLATFORM_OPTIONS = ["Mobile", "PC", "PS4", "PS5", "Switch", "Xbox One", "Xbox Series"];
 
-export function AddGame() {
+export default function AddGame() {
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
     const [players, setPlayers] = useState<string[]>([]);

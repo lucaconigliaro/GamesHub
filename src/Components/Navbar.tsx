@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+// Component
 import FavoritesSidebar from "./FavoritesSidebar";
 
+// Interface is used to define the structure of the navigation links
 interface NavLinkItem {
   path: string;
   title: string;

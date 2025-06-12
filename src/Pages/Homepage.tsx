@@ -1,8 +1,11 @@
 import { useContext, useState, useCallback, useMemo, useEffect, useRef } from "react";
-import GameList from "../Components/GameList";
+// Context
 import { GlobalContext } from "../Context/GlobalContext";
-import CompareTable from "../Components/CompareTable";
+// Type
 import type { Game } from "../Types/Game";
+// Components
+import GameList from "../Components/GameList";
+import CompareTable from "../Components/CompareTable";
 import Carousel from "../Components/Carousel";
 
 export default function HomePage() {
@@ -21,6 +24,7 @@ export default function HomePage() {
   const [sortOrder, setSortOrder] = useState<1 | -1>(1);
   const [gamesToCompare, setGamesToCompare] = useState<Game[]>([]);
 
+  // Note: HTMLDivElement is used beacuse TypeScript needs to know the type of the ref
   const compareRef = useRef<HTMLDivElement | null>(null);
 
   // Debounce function to limit the frequency of search updates
@@ -117,7 +121,7 @@ export default function HomePage() {
 
   return (
     <div className="bg-gradient-to-b from-gray-950 to-gray-900 min-h-screen w-full">
-      {/* Hero  */}
+      {/* Hero */}
       <section className="bg-gradient-to-b from-gray-950 to-gray-900 text-white py-24 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl font-extrabold mb-4">
@@ -143,55 +147,61 @@ export default function HomePage() {
       </section>
 
       {/* Filter, list and comparator */}
-      <section className="px-4 pb-20">
+      <section className="px-2 sm:px-4 pb-20">
         <div className="max-w-6xl mx-auto">
           {/* Filtri */}
-          <div className="flex flex-wrap gap-4 justify-center mb-10">
-            <input
-              type="text"
-              placeholder="Cerca un gioco..."
-              onChange={(e) => debouncedSetSearchQuery(e.target.value)}
-              className="w-64 rounded border border-gray-600 bg-gray-800 text-white placeholder-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <select
-              className="w-64 rounded border border-gray-600 bg-gray-800 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              <option value="Tutti">Tutte le categorie</option>
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-            <select
-              className="w-64 rounded border border-gray-600 bg-gray-800 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={selectedPlatform}
-              onChange={(e) => setSelectedPlatform(e.target.value)}
-            >
-              <option value="Tutte">Tutte le piattaforme</option>
-              {platform.map((plat) => (
-                <option key={plat} value={plat}>
-                  {plat}
-                </option>
-              ))}
-            </select>
-          </div>
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 justify-center items-center mb-10">
+            {/* Search */}
+            <div className="w-full sm:w-auto flex justify-center">
+              <input
+                type="text"
+                placeholder="Cerca un gioco..."
+                onChange={(e) => debouncedSetSearchQuery(e.target.value)}
+                className="w-60 sm:w-48 md:w-56 lg:w-64 rounded border border-gray-600 bg-gray-800 text-white placeholder-gray-400 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
 
+            {/* Categories and platforms */}
+            <div className="flex gap-3 mt-3 sm:mt-0 flex-wrap justify-center">
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="w-40 sm:w-48 md:w-56 lg:w-64 rounded border border-gray-600 bg-gray-800 text-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="Tutti">Tutte le categorie</option>
+                {categories.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+              <select
+                value={selectedPlatform}
+                onChange={(e) => setSelectedPlatform(e.target.value)}
+                className="w-40 sm:w-48 md:w-56 lg:w-64 rounded border border-gray-600 bg-gray-800 text-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="Tutte">Tutte le piattaforme</option>
+                {platform.map((plat) => (
+                  <option key={plat} value={plat}>
+                    {plat}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
           {/* Order */}
-          <div className="flex gap-3 flex-wrap items-center justify-center mb-6">
-            <h1 className="text-white text-3xl font-semibold">I nostri giochi</h1>
+          <div className="flex gap-2 flex-wrap items-center justify-center mb-6">
+            <h1 className="text-white text-2xl sm:text-3xl font-semibold">I nostri giochi</h1>
             <button
               onClick={() => handleSort("title")}
-              className="rounded border border-blue-500 text-blue-500 px-3 py-1 text-sm hover:bg-blue-500 hover:text-white transition"
+              className="rounded border border-blue-500 text-blue-500 px-2 py-1 text-xs sm:text-sm hover:bg-blue-500 hover:text-white transition hover:scale-110"
               type="button"
             >
               Titolo {sortBy === "title" && (sortOrder === 1 ? "A-Z ↑" : "Z-A ↓")}
             </button>
             <button
               onClick={() => handleSort("category")}
-              className="rounded border border-blue-500 text-blue-500 px-3 py-1 text-sm hover:bg-blue-500 hover:text-white transition"
+              className="rounded border border-blue-500 text-blue-500 px-2 py-1 text-xs sm:text-sm hover:bg-blue-500 hover:text-white transition hover:scale-110"
               type="button"
             >
               Categoria {sortBy === "category" && (sortOrder === 1 ? "A-Z ↑" : "Z-A ↓")}

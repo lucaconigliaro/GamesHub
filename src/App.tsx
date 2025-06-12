@@ -1,10 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// Context
 import GlobalProvider from './Context/GlobalContext';
+// Layout
 import DefaultLayout from './Layout/DefaultLayout';
 // Pages
 import Homepage from './Pages/Homepage';
+import AddGame from './Pages/AddGame';
 import GameDetail from './Pages/GameDetail';
-import { AddGame } from './Pages/AddGame';
 import NotFound from './Pages/NotFound';
 
 function App() {

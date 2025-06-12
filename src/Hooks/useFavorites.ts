@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+// Type
 import type { Game } from "../Types/Game";
 
 export default function useFavorites() {

@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import type { ReactNode } from "react";
+// Types
 import type { GlobalContextType } from "../Types/GlobalContextType";
-
 // Hooks
 import useGames from "../Hooks/useGames";
 import useFavorites from "../Hooks/useFavorites";

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+// Type
 import type { Game } from "../Types/Game"
+// Data
 import { gamesData } from "../Data/gamesData";
 
 // Local storage key for saving games data
