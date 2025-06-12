@@ -3,7 +3,7 @@ import GlobalProvider from './Context/GlobalContext';
 import DefaultLayout from './Layout/DefaultLayout';
 // Pages
 import Homepage from './Pages/Homepage';
-import GameDetailPage from './Pages/GameDetail';
+import GameDetail from './Pages/GameDetail';
 import { AddGame } from './Pages/AddGame';
 import NotFound from './Pages/NotFound';
 
@@ -15,7 +15,7 @@ function App() {
           <Route element={<DefaultLayout />}>
             <Route path="/" element={<Homepage />} />
             <Route path="/add" element={<AddGame />} />
-            <Route path="/games/:id" element={<GameDetailPage />} />
+            <Route path="/games/:id" element={<GameDetail />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
