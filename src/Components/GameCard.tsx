@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { GlobalContext } from "../Context/GlobalContext";
 import type { Game } from "../Types/Game";
+import { Link } from "react-router-dom";
 
 interface GameCardProps {
   game: Game;
@@ -49,12 +50,11 @@ const GameCard = ({ game, toggleCompare, gamesToCompare, onDelete }: GameCardPro
         </div>
 
         <div className="mt-4 flex gap-2 text-xs">
-          <a
-            href={`/games/${game.id}`}
+          <Link to={`/games/${game.id}`}
             className="block text-center border border-white text-white bg-white/10 backdrop-blur-sm rounded px-3 py-1 text-xs transition-all duration-200 ease-in-out transform hover:scale-105 hover:bg-white/20 hover:text-yellow-300"
           >
             Dettagli
-          </a>
+          </Link>
 
           <button
             disabled={disableCompare && !isSelected}
