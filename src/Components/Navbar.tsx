@@ -38,9 +38,9 @@ export default function NavBar() {
           {/* Hamburger */}
           <button
             onClick={toggleMobileMenu}
-            className="md:hidden text-gray-300 hover:text-yellow-400 transition duration-200 focus:outline-none"
+            className="md:hidden text-3xl text-gray-300 hover:text-yellow-400 transition duration-200 focus:outline-none"
           >
-            ☰
+            {isMobileMenuOpen ? "✕" : "☰"}
           </button>
 
           {/* Desktop Nav */}
