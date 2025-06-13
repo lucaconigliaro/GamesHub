@@ -122,9 +122,9 @@ export default function HomePage() {
   return (
     <div className="bg-gradient-to-b from-gray-950 to-gray-900 min-h-screen w-full">
       {/* Hero */}
-      <section className="bg-gradient-to-b from-gray-950 to-gray-900 text-white py-24 px-4">
+      <section className="bg-gradient-to-b from-gray-950 to-gray-900 text-white pt-24 pb-10 px-4">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl font-extrabold mb-4">
+          <h1 className="text-4xl sm:text-5xl font-extrabold ">
             Benvenuto su <span className="text-yellow-400">GamesHub</span>
           </h1>
           <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto">
@@ -137,7 +137,7 @@ export default function HomePage() {
       </section>
 
       {/* Carousel */}
-      <section className="px-4 py-16">
+      <section className="px-4 pb-10">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-white mb-6 text-center pt-10">
             Scopri i migliori giochi scelti dalla community
