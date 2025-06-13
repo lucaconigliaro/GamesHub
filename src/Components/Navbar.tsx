@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-// Components
+
+// Component
 import FavoritesSidebar from "./FavoritesSidebar";
 
 // Interface is used to define the structure of the navigation links
@@ -18,95 +19,82 @@ export default function NavBar() {
     { path: "/add", title: "Aggiungi un gioco" },
   ];
 
-  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-  const closeMobileMenu = () => setIsMobileMenuOpen(false);
-
-  const openSidebar = () => {
-    setIsSidebarOpen(true);
-    closeMobileMenu(); // Close mobile menu when opening sidebar
-  };
-
+  const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
   const closeSidebar = () => setIsSidebarOpen(false);
 
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 bg-gray-950/80 shadow-md z-50 backdrop-blur-md border-b border-gray-800">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <NavLink
-              to="/"
-              className="text-white font-bold text-2xl tracking-wide select-none hover:text-yellow-400 transition duration-200"
-            >
-              Games Hub <span className="text-yellow-400">👾</span>
-            </NavLink>
+        <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
 
-            {/* Desktop Menu */}
-            <ul className="hidden sm:flex space-x-6 items-center text-sm font-medium">
-              {navLinks.map((link, index) => (
-                <li key={index}>
-                  <NavLink
-                    to={link.path}
-                    className={({ isActive }) =>
-                      isActive
-                        ? "text-yellow-400"
-                        : "text-gray-300 hover:text-yellow-400 transition duration-200"
-                    }
-                  >
-                    {link.title}
-                  </NavLink>
-                </li>
-              ))}
-              <li>
-                <button
-                  onClick={openSidebar}
-                  className="text-gray-300 hover:text-yellow-400 transition duration-200 focus:outline-none px-2 py-1 rounded"
-                >
-                  ⭐ Preferiti
-                </button>
-              </li>
-            </ul>
+          {/* Logo */}
+          <NavLink
+            to="/"
+            className="text-white font-bold text-2xl tracking-wide select-none hover:text-yellow-400 transition duration-200"
+          >
+            Games Hub <span className="text-yellow-400">👾</span>
+          </NavLink>
 
-            {/* Mobile Hamburger */}
-            <div className="sm:hidden">
-              <button
-                onClick={toggleMobileMenu}
-                className="text-gray-300 text-2xl focus:outline-none"
+          {/* Hamburger */}
+          <button
+            onClick={toggleMobileMenu}
+            className="md:hidden text-gray-300 hover:text-yellow-400 transition duration-200 focus:outline-none"
+          >
+            ☰
+          </button>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center space-x-6 text-sm font-medium ml-auto">
+            {navLinks.map((link, index) => (
+              <NavLink
+                key={index}
+                to={link.path}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-yellow-400"
+                    : "text-gray-300 hover:text-yellow-400 transition duration-200"
+                }
               >
-                {isMobileMenuOpen ? "✖" : "☰"}
-              </button>
-            </div>
+                {link.title}
+              </NavLink>
+            ))}
+            <button
+              onClick={() => setIsSidebarOpen(true)}
+              className="text-gray-300 hover:text-yellow-400 transition duration-200"
+            >
+              ⭐ Preferiti
+            </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Nav */}
         {isMobileMenuOpen && (
-          <div className="sm:hidden bg-gray-900 border-t border-gray-800">
-            <ul className="flex flex-col px-4 py-3 space-y-3 text-sm font-medium">
+          <div className="md:hidden px-4 pb-4 bg-gray-950 border-t border-gray-800">
+            <div className="flex flex-row justify-end space-x-4 mt-2 text-sm font-medium">
               {navLinks.map((link, index) => (
-                <li key={index}>
-                  <NavLink
-                    to={link.path}
-                    onClick={closeMobileMenu}
-                    className={({ isActive }) =>
-                      isActive
-                        ? "text-yellow-400"
-                        : "text-gray-300 hover:text-yellow-400 transition duration-200"
-                    }
-                  >
-                    {link.title}
-                  </NavLink>
-                </li>
-              ))}
-              <li>
-                <button
-                  onClick={openSidebar}
-                  className="text-gray-300 hover:text-yellow-400 transition duration-200 focus:outline-none"
+                <NavLink
+                  key={index}
+                  to={link.path}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-yellow-400"
+                      : "text-gray-300 hover:text-yellow-400 transition duration-200"
+                  }
                 >
-                  ⭐ Preferiti
-                </button>
-              </li>
-            </ul>
+                  {link.title}
+                </NavLink>
+              ))}
+              <button
+                onClick={() => {
+                  setIsSidebarOpen(true);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="text-gray-300 hover:text-yellow-400 transition duration-200"
+              >
+                ⭐ Preferiti
+              </button>
+            </div>
           </div>
         )}
       </nav>
